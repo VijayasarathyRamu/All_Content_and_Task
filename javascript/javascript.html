@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //1.default function
+        function greeting(){
+            return "hi everyone";
+        }
+        document.write(greeting(),"<br>");
+
+        //2.parametric function
+        //old type
+        function welcome(name){
+            return "welcome "+name+" in changepond";
+        }
+        document.write(welcome("vijay"),"<br>")
+        //new type - ES-6
+        function welcome(name){
+            return `welcome ${name} in changepond`;
+        }
+        document.write(welcome("sarathy"),"<br>")
+        document.write(welcome("praveen"),"<br>")
+
+        //3.anonymous function
+        let add = function (num1,num2){
+            return num1+num2;
+        }
+        document.write(add(100,200),"<br>")
+
+        //4.arrow function
+        let sub = (num1,num2) => {
+            return num1-num2;
+        }
+        document.write(sub(500,300),"<br>")
+
+        //5.optional parametrize function
+        let fullname = (fname,lname,ini="") =>{
+            return fname+lname+ini;
+        }
+        document.write(fullname("vijay","saarathy"),"<br>")
+        document.write(fullname("vijay","saarathy"," v"),"<br>")
+
+        //6.rest paramerize function
+        // let stdlist = (s1) => {
+        //     return s1;
+        // }
+        // document.write(stdlist("vijay"),"<br>");
+        // let stdlist1 = (...std) =>{
+        //     return std;
+        // }
+        // document.write(stdlist1("vijay","sarathy","vijayasarathy","kumar","shanmugam"));
+    </script>
+</body>
+</html>

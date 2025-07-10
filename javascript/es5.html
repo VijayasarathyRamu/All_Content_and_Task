@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //es5 features
+        let msg = "     hello friend      ";
+        // document.write(msg);
+        console.log(msg.trim());
+        // console.log(msg)
+        document.write(msg.trim(),"<br>");
+
+        //1.forEach
+        let breakfast = ["idly","dosa","vada","upma","samosa"];
+        breakfast.forEach((value,index)=>{
+            document.write(value+",","<br>")
+        })
+        
+        //2.map()
+        let num = [1,2,3,4,5,7,9]//,10,11,13,15,18,19]
+        let mapout = num.map((value,index) =>{
+            return value * 3;
+        })
+        document.write(mapout,"<br>")
+
+        //3.filter
+        let filterout = num.filter((val,index)=>{
+            return val % 2 ==0;
+            // document.write(val%2==0,"<br>")
+        })
+        document.write(filterout,"<br>")
+
+        //4.every
+        let everyout = num.every((value,index) =>{
+            return value < 10;
+        })
+        document.write(everyout,"<br>")
+    </script>
+</body>
+</html>

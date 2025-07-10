@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label>Enter tempature in Celcius: </label>
+        <input type="number" id="value"><br><br>
+        <button type="button" onclick="fun()">Convert celcius into Fahrenheit </button><br><br>
+        <strong>Result: <span id="res"></span></strong>
+    </form>
+    <script>
+        function fun(){
+            let val = document.getElementById("value").value;
+            document.getElementById("res").innerHTML = (val*1.8) + 32;
+        }
+    </script>
+</body>
+</html>

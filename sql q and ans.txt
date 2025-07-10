@@ -1,0 +1,63 @@
+1.select * from student where ID IN(select studentID from batch_students group by studentID having count(batchID)>2);
+
+
+
+SELECT * FROM student WHERE ID IN (SELECT studentID FROM batch_students WHERE batchID IN (SELECT batchID FROM batch_students bs JOIN student st ON bs.studentID = st.ID WHERE st.namefirst = 'saleel')) AND s.namefirst <> 'saleel';
+
+
+
+
+Task on Sub-queries with joins
+
+Sub-queries with joins.
+
+1.	Display all student who have taken admission in more than 2 batches.
+2.	Display the student detail who have joined the same batch of the student ‘saleel’.
+3.	Display all courses where least number of students have taken the admission.
+4.	Display student details who haven’t taken the admission.
+5.	Get all courses where no modules are defined in course_modules table.
+6.	Display course_batchesdetails where student has taken the admission.
+7.	Display all students whose marks of ‘BE’ is more than ‘ULKA’ marks in ‘BE’.
+8.	Display all students whose marks are more than ‘saleel’ marks in 10th std.
+9.	Display students whose DOB is as same as ‘kaushal’
+10.	Display all student details who have three or more phone numbers.
+11.	Display marks for the studentID 1 and 7 who have done ‘BE’ also fine out the difference of marks between them. (Note: the marks and difference between the marks must be displayed side by side).
+12.	Display all student who are not joined any of the batch.
+13.	Display all course_batches details who are starting on the same day as ‘Batch1’.
+14.	Display all students whose 10th marks is more than student ‘Neel’s 10th marks.
+15.	Get all student with their qualification details who have highest marks in ‘BE’.
+16.	Get all student with their qualification details who have second highest marks in ‘BE’.
+17.	Display the student and student_qualification details who have scored the maximum marks in ‘BE’
+18.	Display the student details who have scored the maximum marks in ‘BE’
+19.	Display the student details who have scored the minimum marks in ‘10’ std.
+20.	Display all student and student_qualification details of those students who have scored marks more than ‘RAJAN’ in ‘BE’.
+21.	Display all student who have done ‘BE’ in the same year as of studentID 16.
+22.	Display all odd records.
+23.	Calculate the sum of marks student wise of their qualifications (i.e. 10th, 12th and BE marks)
+24.	Display students’ details who are not having 'Aadhaar' card.
+
+Answers:
+1.	select * from student where id in (select studentID from batch_students group by studentID having count(*) > 2);
+2.	select * from student where id in (select studentID from batch_students where batchID in (select batchID from batch_students where studentID = (select id from student where namefirst = 'saleel')));
+3.	select * from course where id in (select courseID from course_batches where id in (select batchID from batch_students group by batchID having count(studentID) = (select min(student_count) from (select count(studentID) as student_count from batch_students group by batchID) as temp)));
+4.	select * from student where id not in (select distinct studentID from batch_students);
+5.	select * from course where id not in (select courseID from course_modules);
+6.	select * from course_batches where id in (select batchID from batch_students);
+7.	select * from student where id in (select studentID from student_qualifications where name = 'BE' and cast(marks as unsigned) > (select cast(marks as unsigned) from student_qualifications where studentID = (select id from student where namefirst = 'ulka') and name = 'BE'));
+8.	select * from student where id in (select studentID from student_qualifications where name = '10' and cast(marks as unsigned) > (select cast(marks as unsigned) from student_qualifications where studentID = (select id from student where namefirst = 'saleel') and name = '10'));
+9.	select * from student where dob = (select dob from student where namefirst = 'kaushal');
+10.	select * from student where id in (select studentID from student_phone group by studentID having count(*) >= 3);
+11.	---
+12.	select * from student where id not in (select distinct studentID from batch_students);
+13.	select * from course_batches where starton = (select starton from course_batches where name = 'Batch1');
+14.	select * from student where id in (select studentID from student_qualifications where name = '10' and cast(marks as unsigned) > (select cast(marks as unsigned) from student_qualifications where studentID = (select id from student where namefirst = 'neel') and name = '10'));
+15.	select * from student s join student_qualifications q on s.id = q.studentID where q.name = 'BE' and cast(q.marks as unsigned) = (select max(cast(marks as unsigned)) from student_qualifications where name = 'BE');
+16.	select * from student s join student_qualifications q on s.id = q.studentID where q.name = 'BE' and cast(q.marks as unsigned) = (select max(cast(marks as unsigned)) from student_qualifications where name = 'BE' and cast(marks as unsigned) < (select max(cast(marks as unsigned)) from student_qualifications where name = 'BE'));
+17.	select * from student s join student_qualifications q on s.id = q.studentID where q.name = 'BE' and cast(q.marks as unsigned) = (select max(cast(marks as unsigned)) from student_qualifications where name = 'BE');
+18.	select * from student where id in (select studentID from student_qualifications where name = 'BE' and cast(marks as unsigned) = (select max(cast(marks as unsigned)) from student_qualifications where name = 'BE'));
+19.	select * from student where id in (select studentID from student_qualifications where name = '10' and cast(marks as unsigned) = (select min(cast(marks as unsigned)) from student_qualifications where name = '10'));
+20.	select * from student s join student_qualifications q on s.id = q.studentID where q.name = 'BE' and cast(q.marks as unsigned) > (select cast(marks as unsigned) from student_qualifications where studentID = (select id from student where namefirst = 'rajan') and name = 'BE');
+21.	select * from student where id in (select studentID from student_qualifications where name = 'BE' and year = (select year from student_qualifications where studentID = 16 and name = 'BE'));
+22.	select * from student where mod(id, 2) = 1;
+23.	select studentID, sum(cast(marks as unsigned)) as total_marks from student_qualifications where name in ('10', '12', 'BE') group by studentID;
+24.	select * from student where id not in (select studentID from student_cards where name = 'Aadhaar');

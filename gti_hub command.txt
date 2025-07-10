@@ -1,0 +1,10 @@
+
+git init
+git config --global user.name  "Your Name"2
+git config --global user.email "Your EmailID"
+git status
+git add .
+git remote add origin your repo link
+git commit -m "write message here with limit 50 word"
+
+git push origin branchName 

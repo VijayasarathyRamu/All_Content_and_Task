@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    
+    <script>
+        //array
+        //old type
+        let courses = ["react","python","mysql"];
+        console.log(courses);
+            // let frontend = courses[0];
+            // let backend = courses[1];
+            // let database = courses[2];
+        // document.write(frontend, backend, database,"<br>")
+        //new type
+        // destructuring type
+        const [frontend,backend,database] = courses;
+        document.write(frontend,backend,database,"<br>");
+
+        //object
+        let employee = {id:101,name:"vijay",salary:35000,address:"chennai"};
+        // document.write(employee);
+        //destruturing method
+        const {id,name,salary,address} = employee;
+        document.write(id,name,salary,address,"<br>");
+
+        
+    </script>
+</body>
+</html>
